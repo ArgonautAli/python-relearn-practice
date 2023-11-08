@@ -32,3 +32,9 @@ luck_num.sort()
 luck_num.reverse() 
 
 friends2 = friends.copy()
+
+friends[1:2]
+
+friends[::2]
+
+new_list = list.copy()
