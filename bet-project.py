@@ -13,7 +13,19 @@ def get_slot_machine_spins(rows, cols, symbols):
         for _ in range(counts):
             all_symbols.append(symbol)
 
-    columns = [[], [], []]
+    columns = []
+
+    for col in range(cols):
+        column = []
+        current_symbols = all_symbols[:]
+        for row in range(rows):
+            value = random.choice(all_symbols)
+            current_symbols.remove(value)
+            column.append(value)
+        
+        columns.append(column)
+
+    return columns
 
 
 
@@ -31,6 +43,16 @@ def deposit():
     
     return amount
 
+def print_slot_machine(columns):
+    for row in range(len(columns[0])):
+        for i, column in  enumerate(columns):
+            if i != len(columns) - 1:
+                print(column[row], end = " | ")
+            else: print(column[row], end = "")
+
+        print()
+
+
 def main():
     balance = deposit()
     lines = get_number_of_lines()
@@ -41,6 +63,9 @@ def main():
         else:
             break
     print(f"You are betting ${bet} on ${lines} line. Your total bet is $", bet*lines)
+
+    slots = get_slot_machine_spins(ROWS, COLS, SYMBOLS)
+    print_slot_machine(slots)
 
 
 main()
